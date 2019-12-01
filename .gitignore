@@ -1,0 +1,5 @@
+.idea/
+data/
+_errors_sql/
+venv/
+*.log
