@@ -5,5 +5,9 @@ while ! PGPASSWORD=gnaf psql -h db -U gnaf -l >/dev/null; do
   sleep 5
 done
 
+echo "** PostgreSQL is ready. **"
+
+echo `hostname -I | awk '{print $1}'`
+
 echo "** Launching loader **"
 python load-gnaf.py --gnaf-tables-path /data/*GNAF_PipeSeparatedValue*/ --admin-bdys-path /data/*AdminBounds_ESRIShapefileorDBFfile*/ --pghost db --pgdb gnaf --pguser gnaf --pgpassword gnaf

@@ -10,8 +10,12 @@ db:
   environment:
     - POSTGRES_USER=gnaf
     - POSTGRES_PASSWORD=gnaf
+  volumes:
+    - ./volumes/postgres-data:/var/lib/postgresql/data
   volumes_from:
     - data
+  ports:
+    - "5432:5432"
 
 loader:
   build: .
@@ -21,3 +25,27 @@ loader:
    - db
   ports:
     - "9000"
+  tty: true
+
+# http://127.0.0.1:8080/?pgsql=db&username=gnaf&db=gnaf&ns=public
+adminer:
+  image: adminer
+  restart: always
+  links:
+    - db
+  ports:
+    - "8080:8080"
+
+# http://localhost:8081/browser/ with login details below and host 'db'
+pgadmin:
+  image: dpage/pgadmin4
+  links:
+    - db
+  environment:
+    PGADMIN_DEFAULT_EMAIL: gnaf@test.com
+    PGADMIN_DEFAULT_PASSWORD: gnaf
+  volumes:
+    - ./volumes/pgadmin:/root/.pgadmin
+  ports:
+    - "8081:80"
+

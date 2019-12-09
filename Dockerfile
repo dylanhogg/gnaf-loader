@@ -20,6 +20,4 @@ ENV HOME /app
 VOLUME ["/data"]
 COPY . /app
 
-# entrypoint shell script that by default starts runserver
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-CMD ["loader"]
+#ENTRYPOINT ["tail -f /dev/null"]

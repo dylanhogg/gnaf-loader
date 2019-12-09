@@ -1,5 +1,6 @@
 .idea/
 data/
+volumes/
 _errors_sql/
 venv/
 *.log
